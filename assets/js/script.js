@@ -6,9 +6,9 @@ $("#currentDay").text(today.format("dddd, MMMM Do"));
 // Reference: https://stackoverflow.com/questions/62904905/how-do-i-color-code-time-blocks-using-js
 var currentHour = parseInt(today.format("H"));
 
-$("textarea").each(function() {
+$("textarea").each(function () {
     var hour = parseInt(this.name);
-    if (hour > currentHour){
+    if (hour > currentHour) {
         $(this).addClass("future");
     } else if (hour < currentHour) {
         $(this).addClass("past");
@@ -30,19 +30,19 @@ var pm5 = document.querySelector("#t17");
 // save to local storage
 function saveNotes() {
 
-var notes = {
-    am9: am9.value,
-    am10: am10.value,
-    am11: am11.value, 
-    pm12: pm12.value,
-    pm1: pm1.value, 
-    pm2: pm2.value,
-    pm3: pm3.value, 
-    pm4: pm4.value, 
-    pm5: pm5.value
-}
+    var notes = {
+        am9: am9.value,
+        am10: am10.value,
+        am11: am11.value,
+        pm12: pm12.value,
+        pm1: pm1.value,
+        pm2: pm2.value,
+        pm3: pm3.value,
+        pm4: pm4.value,
+        pm5: pm5.value
+    }
 
-localStorage.setItem("notes",JSON.stringify(notes));
+    localStorage.setItem("notes", JSON.stringify(notes));
 
 }
 
@@ -66,7 +66,7 @@ function renderSavedNotes() {
 
 }
 
-$(".saveBtn").click(function() {
+$(".saveBtn").click(function () {
     saveNotes();
     renderSavedNotes();
 })
