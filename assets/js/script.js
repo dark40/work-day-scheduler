@@ -3,10 +3,11 @@ var today = moment();
 $("#currentDay").text(today.format("dddd, MMMM Do"));
 
 // change color code between time
+// Reference: https://stackoverflow.com/questions/62904905/how-do-i-color-code-time-blocks-using-js
 var currentHour = parseInt(today.format("H"));
 
 $("textarea").each(function() {
-    var hour = parseInt(this.id);
+    var hour = parseInt(this.name);
     if (hour > currentHour){
         $(this).addClass("future");
     } else if (hour < currentHour) {
@@ -16,21 +17,64 @@ $("textarea").each(function() {
     }
 });
 
-// save to local storage for only a day 
+var am9 = document.querySelector("#t9");
+var am10 = document.querySelector("#t10");
+var am11 = document.querySelector("#t11");
+var pm12 = document.querySelector("#t12");
+var pm1 = document.querySelector("#t13");
+var pm2 = document.querySelector("#t14");
+var pm3 = document.querySelector("#t15");
+var pm4 = document.querySelector("#t16");
+var pm5 = document.querySelector("#t17");
+
+// save to local storage
+function saveNotes() {
+
 var notes = {
-    am9: $(9).value,
-    am10: $(10).value,
-    am11: $(11).value,
-    pm12: $(12).value,
-    pm1: $(13).value,
-    pm2: $(14).value,
-    pm3: $(15).value,
-    pm4: $(16).value,
-    pm5: $(17).value,
+    am9: am9.value,
+    am10: am10.value,
+    am11: am11.value, 
+    pm12: pm12.value,
+    pm1: pm1.value, 
+    pm2: pm2.value,
+    pm3: pm3.value, 
+    pm4: pm4.value, 
+    pm5: pm5.value
 }
 
-// clear the local storage on second day
+localStorage.setItem("notes",JSON.stringify(notes));
 
+}
+
+function renderSavedNotes() {
+
+    var lastNote = JSON.parse(localStorage.getItem("notes"));
+
+    if (lastNote !== null) {
+        am9.value = lastNote.am9;
+        am10.value = lastNote.am10;
+        am11.value = lastNote.am11;
+        pm12.value = lastNote.pm12;
+        pm1.value = lastNote.pm1;
+        pm2.value = lastNote.pm2;
+        pm3.value = lastNote.pm3;
+        pm4.value = lastNote.pm4;
+        pm5.value = lastNote.pm5;
+    } else {
+        return;
+    }
+
+}
+
+$(".saveBtn").click(function() {
+    saveNotes();
+    renderSavedNotes();
+})
+
+function init() {
+    renderSavedNotes();
+}
+init();
 
 
 
