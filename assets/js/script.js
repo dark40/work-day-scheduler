@@ -26,6 +26,7 @@ var pm2 = document.querySelector("#t14");
 var pm3 = document.querySelector("#t15");
 var pm4 = document.querySelector("#t16");
 var pm5 = document.querySelector("#t17");
+var pop = document.querySelector("#popUp");
 
 // save to local storage
 function saveNotes() {
@@ -66,9 +67,20 @@ function renderSavedNotes() {
 
 }
 
+// Let the popup show and disappear in 2 seconds. 
+function popUp() {
+    pop.setAttribute("style", "display:block;");
+
+   setTimeout(() => {
+        pop.setAttribute("style", "display:none;");
+   }, 2000);
+}
+
+
 $(".saveBtn").click(function () {
     saveNotes();
     renderSavedNotes();
+    popUp();
 })
 
 function init() {
